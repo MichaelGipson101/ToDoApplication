@@ -35,6 +35,10 @@ class ToDoAdapter (
         ))
     }
 
+    /**
+     * Initializes each of the items in the recyclerview and maps the
+     * data in the mutablelist of todos to it
+     */
     override fun onBindViewHolder(holder: ToDoViewHolder, position: Int) {
         //get current item in mutablelist of todos and store it
         //in an immutable var
@@ -54,12 +58,34 @@ class ToDoAdapter (
             //assign the is_checked value in the current item to text attr of
             //checkbox
             todoCheckBox!!.isChecked = currentToDo.isChecked
+            
+            //tell kotlin that checkbox isn't null
+            //set oncheckedchangelistener to it
+            todoCheckBox!!.setOnCheckedChangeListener { _, _ ->  }
+            //reverse the value in the ischecked field of the current todo
+                currentToDo.isChecked = !currentToDo.isChecked
         }
 
     }
 
+    /**
+     * Returns the number of items in the mutable list of todos
+     */
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return todos.size
+    }
+
+    /**
+     * This method gets called by the addtodo method in the mainactivity
+     * when the add button is clicked. It will call the dbhandler method
+     * that adds a todo into the db
+     */
+    fun addTodo(dbHandler: DBHandler, name: String) {
+        //ask kotlin to check if the dbhandler is null
+        //if it isn't, call its addtodo method passing the
+        //specified todo name
+        dbHandler?.addTodo(name)
+        notifyDataSetChanged()
     }
 
 
