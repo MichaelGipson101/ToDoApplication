@@ -63,6 +63,25 @@ SQLiteOpenHelper(context, DATABASE_NAME, cursorFactory, DATABASE_VERSION){
     }
 
     /**
+     * This method gets called when the delete button in the main
+     * activity gets clicked, it deletes a todo from the DB
+     */
+    fun deleteTodo(id: Int) {
+        //get a reference to the todo db
+        val db = writableDatabase
+
+        //define delete statement
+        val query = "DELETE FROM " + TABLE_TODO_LIST +
+                " WHERE " + COLUMN_TODO_ID + " = " + id
+
+        //execute delete statement
+        db.execSQL(query)
+
+        //close db ref
+        db.close()
+    }
+
+    /**
      * This method gets called when the mainactivity is created
      * and when the add and delete buttons get clicked.
      * @return mutablelist o todos that contains all the data

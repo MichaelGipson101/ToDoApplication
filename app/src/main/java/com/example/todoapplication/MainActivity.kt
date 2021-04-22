@@ -83,7 +83,13 @@ class MainActivity : AppCompatActivity() {
      * @param view Mainactivity view
      */
     fun deleteTodo(view: View?) {
-
+        //ask kotlin to check if dbhandler is null
+        //if it isn't null, pass it to the delete todos
+        dbHandler?.let {
+            toDoAdapter.deleteTodo(it)
+        }
+        //call notifyadapter
+        notifyAdapter()
     }
 
     /**

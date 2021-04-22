@@ -88,5 +88,19 @@ class ToDoAdapter (
         notifyDataSetChanged()
     }
 
+    fun deleteTodo(dbHandler: DBHandler) {
+        //iterate through the mutablelist of todos
+        todos.forEach {
+            //check if the current todos ischecked is equal to true
+            if (it.isChecked) {
+                //ask kotlin to check if the dbhandler isn't null
+                //if it isn't, call deletetodo
+                //pass the current todo's db id
+                dbHandler?.deleteTodo(it.id)
+            }
+        }
+        notifyDataSetChanged()
+    }
+
 
 }
